@@ -84,3 +84,16 @@ media_analistas <- bd_remuneracoes %>%
 
 # Exibir a média
 print(round(media_analistas,2))
+
+# FREQUENCIA DE CARGOS
+
+bd_remuneracoes %>%
+  count(Cargo) %>%
+  arrange(desc(n))
+
+bd_remuneracoes %>%
+  group_by(Cargo) %>%
+  summarise(media_valor = mean(Valor, na.rm = TRUE)) %>%
+  arrange(desc(media_valor)) %>%
+  print(n=20)
+
