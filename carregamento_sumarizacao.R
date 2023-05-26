@@ -97,3 +97,19 @@ bd_remuneracoes %>%
   arrange(desc(media_valor)) %>%
   print(n=20)
 
+rodrigo <- bd_remuneracoes |> 
+  filter(Nome == 'RODRIGO DEL FIUME ZAMBON')
+
+mean(bd_remuneracoes$Valor, na.rm = TRUE)
+
+#CALCULO DO SALARIO
+
+calcular_salario <- function(nome) {
+  salario <- bd_remuneracoes %>%
+    filter(Nome == nome) %>%
+    mutate(salario = sum(ifelse(VantagemDesconto == "V", Valor, -Valor), na.rm = TRUE))
+  
+  return(salario$salario[1])
+}
+
+calcular_salario("RODRIGO DEL FIUME ZAMBON")
